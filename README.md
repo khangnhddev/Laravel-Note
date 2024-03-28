@@ -9,3 +9,10 @@ use Illuminate\Support\Facades\Cache;
 Route::get('/cache', function () {
     return Cache::get('key');
 });
+
+```
+
+### What are Laravel events?
+In Laravel, events are a way of decoupling various parts of your application by using a simple observer implementation. Events serve as a means to trigger actions in your application. When a specific event occurs, Laravel allows you to hook into that event and run associated listeners. These listeners are responsible for executing the code in response to the event being fired.
+
+Events can be used for a wide range of purposes, such as sending notifications, changing the state of an application, or handling business logic after a particular action is performed.
