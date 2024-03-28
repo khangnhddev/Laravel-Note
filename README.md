@@ -22,3 +22,6 @@ Laravel's soft delete is a feature that allows you to "delete" records from your
 
 ### Custom Collection
 Laravel's collection class is one of its most powerful features, providing a fluent, convenient wrapper for working with arrays of data. However, there might be cases where you want to extend the base collection class to include your custom methods or override existing ones. This can be particularly useful for encapsulating specific collection behaviors related to your application's domain logic.
+
+### Custom Query Builder Class
+Creating a custom query builder in Laravel allows you to extend the capabilities of the default Eloquent query builder with your own methods, providing a more fluent interface for specific database operations related to your application's domain logic. Here's how you can create and use a custom query builder in Laravel:
