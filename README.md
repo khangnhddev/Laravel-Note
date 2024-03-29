@@ -1,4 +1,4 @@
-
+# This is a simple note
 ### What is the Facade Pattern used for?
 Facades provide a static interface to classes that are available in the application's service container. Laravel facades serve as static proxies to underlying classes in the service container, providing the benefit of a terse, expressive syntax while maintaining more testability and flexibility than traditional static methods.
 All of Laravel's facades are defined in the Illuminate\Support\Facades namespace. Consider:
@@ -29,3 +29,67 @@ Creating a custom query builder in Laravel allows you to extend the capabilities
 ### What is the purpose of the Eloquent `cursor()` method in Laravel?
 
 The Eloquent `cursor()` method in Laravel is intended for iterating through large datasets efficiently. It retrieves a `LazyCollection` instance that fetches one Eloquent model at a time from the database, using PHP generators. This approach greatly reduces memory usage when dealing with thousands or millions of records, as only the current model is held in memory during iteration, unlike `all()` or `get()` methods which load the entire result set at once.
+
+# Scopes
+
+Laravel scopes allow you to encapsulate query logic into methods on your Eloquent models. This can help keep your database queries clean and reusable across your application. Laravel provides two types of scopes: Local Scopes and Global Scopes.
+
+## Local Scopes
+
+Local scopes allow you to define query constraints that can be easily reused. They are defined directly on the Eloquent model and can be chained together with other query builder methods.
+
+### Defining a Local Scope
+
+You define a local scope by prefixing a method on the Eloquent model with `scope`. The scope method should accept an `\Illuminate\Database\Eloquent\Builder` instance as its first argument, along with any additional criteria:
+
+```php
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
+class User extends Model
+{
+    /**
+     * Scope a query to only include active users.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('active', 1);
+    }
+}
+```
+
+## Global Scopes
+
+Global Scopes allow you to add constraints to all queries for a specific model. This is particularly useful for enforcing a certain criterion across all queries for a model, like always filtering out soft-deleted records.
+
+### Defining a Global Scope
+
+To define a global scope, you'll create a class that implements the `Illuminate\Database\Eloquent\Scope` interface. This interface requires you to implement an `apply` method, which adds the scope to the given query builder instance.
+
+```php
+namespace App\Scopes;
+
+use Illuminate\Database\Eloquent\Scope;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
+
+class AgeScope implements Scope
+{
+    /**
+     * Apply the scope to a given Eloquent query builder.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $builder
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @return void
+     */
+    public function apply(Builder $builder, Model $model)
+    {
+        $builder->where('age', '>', 20);
+    }
+}
+
