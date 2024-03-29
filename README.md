@@ -25,3 +25,7 @@ Laravel's collection class is one of its most powerful features, providing a flu
 
 ### Custom Query Builder Class
 Creating a custom query builder in Laravel allows you to extend the capabilities of the default Eloquent query builder with your own methods, providing a more fluent interface for specific database operations related to your application's domain logic. Here's how you can create and use a custom query builder in Laravel:
+
+### What is the purpose of the Eloquent `cursor()` method in Laravel?
+
+The Eloquent `cursor()` method in Laravel is intended for iterating through large datasets efficiently. It retrieves a `LazyCollection` instance that fetches one Eloquent model at a time from the database, using PHP generators. This approach greatly reduces memory usage when dealing with thousands or millions of records, as only the current model is held in memory during iteration, unlike `all()` or `get()` methods which load the entire result set at once.
