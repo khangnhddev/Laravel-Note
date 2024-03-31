@@ -92,4 +92,8 @@ class AgeScope implements Scope
         $builder->where('age', '>', 20);
     }
 }
+```
+
+# Middleware
+Laravel Middleware provides a convenient mechanism for filtering HTTP requests entering your application. Middleware are essentially layers of code that can inspect and manipulate HTTP requests and responses. They can perform a range of functions, such as authenticating users, performing logging, CORS (Cross-Origin Resource Sharing), caching responses, and more. Middleware in Laravel is used to encapsulate this logic outside of your application's core, keeping your codebase clean and focusing on its primary responsibilities.
 
