@@ -97,3 +97,11 @@ class AgeScope implements Scope
 # Middleware
 Laravel Middleware provides a convenient mechanism for filtering HTTP requests entering your application. Middleware are essentially layers of code that can inspect and manipulate HTTP requests and responses. They can perform a range of functions, such as authenticating users, performing logging, CORS (Cross-Origin Resource Sharing), caching responses, and more. Middleware in Laravel is used to encapsulate this logic outside of your application's core, keeping your codebase clean and focusing on its primary responsibilities.
 
+
+# Contracts
+Laravel contracts are a set of interfaces that define the core services provided by the Laravel framework. These interfaces allow developers to define explicit dependencies for their classes, making it easier to understand the functionality being used. Furthermore, contracts serve as a method for loose coupling, enabling developers to use Laravel's features through interfaces rather than concrete implementations. This approach enhances the testability and flexibility of the application by allowing alternative implementations to be easily swapped without changing the contract.
+
+Contracts are essentially a way to use Laravel's features in a more flexible and decoupled manner. They cover a wide range of functionalities, including caching, filesystem, queueing, and sending notifications, among others.
+
+
+
