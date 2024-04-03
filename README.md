@@ -148,4 +148,11 @@ Laravel enables several of its classes to be macroable, meaning you can extend t
 ## Benefits and Caveats
 While macros provide a potent tool for customizing Laravel's functionality, it's crucial to use them judiciously to prevent making your codebase hard to understand and maintain. They are best used for simple, reusable enhancements.
 
+# API Resources
+In the past, one of the first challenges we’d run into when developing APIs in Laravel was how to transform our data. The simplest APIs can just return Eloquent objects as JSON, but very quickly the needs of most APIs outgrow that structure. How should we convert our Eloquent results into the right format? What if we want to embed other resources or do so but only optionally, or add a computed field or hide some fields from APIs but not other JSON output? An API-specific transformer is the solution.
+
+We now have access to a feature called Eloquent API resources, which are structures that define how to transform an Eloquent object (or a collection of Eloquent objects) of a given class to API results. For example, your Dog Eloquent model now has a Dog resource whose responsibility it is to translate each instance of Dog to the appropriate Dog-shaped API response object.
+
+# API Authentication
+Laravel provides two primary tools for authenticating API requests: Sanctum (most recommended) and Passport (powerful but very complex and usually overkill).
 
