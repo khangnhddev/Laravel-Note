@@ -156,3 +156,7 @@ We now have access to a feature called Eloquent API resources, which are structu
 # API Authentication
 Laravel provides two primary tools for authenticating API requests: Sanctum (most recommended) and Passport (powerful but very complex and usually overkill).
 
+# Queues
+Queues in programming are very similar. Your application adds a “job” to a queue, which is a chunk of code that tells the application how to perform a particular behavior. Then some other separate application structure, usually a “queue worker,” takes the responsibility for pulling jobs off of the queue one at a time and performing the appropriate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed.
+
+Laravel makes it easy to serve your queues using Redis, beanstalkd, Amazon Simple Queue Service (SQS), or a database table. You can also choose the sync driver to have the jobs run right in your application without actually being queued, or the null driver for jobs to just be discarded; these two are usually used in local development or testing environments.
