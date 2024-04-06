@@ -160,3 +160,25 @@ Laravel provides two primary tools for authenticating API requests: Sanctum (mos
 Queues in programming are very similar. Your application adds a “job” to a queue, which is a chunk of code that tells the application how to perform a particular behavior. Then some other separate application structure, usually a “queue worker,” takes the responsibility for pulling jobs off of the queue one at a time and performing the appropriate behavior. Queue workers can delete the jobs, return them to the queue with a delay, or mark them as successfully processed.
 
 Laravel makes it easy to serve your queues using Redis, beanstalkd, Amazon Simple Queue Service (SQS), or a database table. You can also choose the sync driver to have the jobs run right in your application without actually being queued, or the null driver for jobs to just be discarded; these two are usually used in local development or testing environments.
+
+# Container
+Laravel’s service container, or dependency injection container, sits at the core of almost every other feature. The container is a simple tool you can use to bind and resolve concrete instances of classes and interfaces, and at the same time, it’s a powerful and nuanced manager of a network of interrelated dependencies. In this chapter, you’ll learn more about what it is, how it works, and how you can use it.
+
+# Sessions
+Session storage is the primary tool we use in web applications to store state between page requests. Laravel’s session manager supports session drivers using files, cookies, a database, Memcached or Redis, DynamoDB, or in-memory arrays (which expire after the page request and are only good for tests).
+
+You can configure all of your session settings and drivers in config/session.php. You can choose whether or not to encrypt your session data, select which driver to use (file is the default), and specify more connection-specific details like the length of session storage and which files or database tables to use. Take a look at the session docs to learn about specific dependencies and settings you need to prepare for whichever driver you choose to use.
+
+The general API of the session tools allows you to save and retrieve data based on individual keys: session()->put('user_id') and session()->get('user_id'), for example. Make sure to avoid saving anything to a flash session key, since Laravel uses that internally for flash (only available for the next page request) session storage.
+
+# Cookies
+You might expect cookies to work the same as sessions and the cache. A facade and a global helper are available for these too, and our mental models of all three are similar: you can get or set their values in the same way.
+
+But because cookies are inherently attached to the requests and responses, you’ll need to interact with cookies differently. Let’s look really briefly at what makes cookies different.
+
+Cookies in Laravel
+Cookies can exist in three places in Laravel. They can come in via the request, which means the user had the cookie when they visited the page. You can read that with the Cookie facade, or you can read it off of the request object.
+
+They can also be sent out with a response, which means the response will instruct the user’s browser to save the cookie for future visits. You can do this by adding the cookie to your response object before returning it.
+
+And last, a cookie can be queued. If you use the Cookie facade to set a cookie, you have put it into a “CookieJar” queue, and it will be removed and added to the response object by the AddQueuedCookiesToResponse middleware.
