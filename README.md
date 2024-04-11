@@ -182,3 +182,5 @@ Cookies can exist in three places in Laravel. They can come in via the request, 
 They can also be sent out with a response, which means the response will instruct the user’s browser to save the cookie for future visits. You can do this by adding the cookie to your response object before returning it.
 
 And last, a cookie can be queued. If you use the Cookie facade to set a cookie, you have put it into a “CookieJar” queue, and it will be removed and added to the response object by the AddQueuedCookiesToResponse middleware.
+
+# Valet
